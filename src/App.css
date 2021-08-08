@@ -47,6 +47,10 @@
   min-height: 100vh;
 }
 
+.welcome-chat-screen {
+  min-height: 90vh;
+}
+
 .chat-screen {
   min-height: 80vh;
   max-height: 80vh;
@@ -70,4 +74,22 @@
   border-radius: 10px;
   padding: 10px;
   font-size: 14px;
+}
+
+.chat-list-box {
+  border-right: 2px solid var(--fontsecondary);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.chat-list-item {
+  border-radius: 10px;
+  border-bottom: 1px solid var(--bgmainlighter);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  cursor: pointer;
+}
+
+.chat-list-item.active {
+  background: var(--bgmainlighter);
 }

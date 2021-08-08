@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Button, Col, FormControl, InputGroup, Row } from 'react-bootstrap'
+import { StoreContext } from '../store'
 
-const Chatinput = ({onInput}) => {
-    const [message, setMessage] = useState('')
+const Chatinput = ({socket}) => {
+    const { dispatchActiveChat } = useContext(StoreContext);
+    const [message, setMessage] = useState('');
 
     const submitMessage = () => {
-        onInput(message);
+        dispatchActiveChat({type: 'ADD_CHAT', payload: message});
         setMessage('');
     }
-
+    
     const onEnter = (e) => {
         if (e.key === 'Enter') {
             submitMessage();

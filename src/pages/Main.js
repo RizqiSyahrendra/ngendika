@@ -1,14 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Container } from 'react-bootstrap';
 import Header from '../components/Header';
 import Chatscreen from '../components/Chatscreen';
 import Chatinput from '../components/Chatinput';
 import { StoreContext } from '../store';
+import { io } from 'socket.io-client';
 
-const Main = () => {
+const socket = io("ws://localhost:5000", {transports: ["websocket", "polling"]});
+
+socket.on("connect_error", () => {
+    // revert to classic upgrade
+    // console.error('failed to connect ws server');
+    // socket.io.opts.transports = ["polling", "websocket"];
+});
+
+const Main = () => { 
     const { stateUser } = useContext(StoreContext);
     const [chatList, setChatList] = useState([
         {
@@ -16,28 +25,29 @@ const Main = () => {
             me: true,
             name: 'Uzumaki',
             text: 'Hello'
-        },
-        {
-            id: 2,
-            me: false,
-            name: 'Sasuke',
-            text: 'Konnichiwa'
-        },
-        {
-            id: 3,
-            me: false,
-            name: 'Sakura',
-            text: 'Ikuzo'
         }
     ]);
 
+    useEffect(() => {
+        socket.on('chat-masuk', (msg) => {
+            const msgObj = JSON.parse(msg);
+            if (msgObj.email !== stateUser.email) {
+                setChatList([...chatList, msgObj]);
+            }
+        });
+    
+    }, [chatList]);
+
     const onInputChat = (textinput) => {
-        setChatList([...chatList, {
-        id: null,
-        me: true,
-        name: stateUser.name,
-        text: textinput
-        }])
+        const chat = {
+            id: null,
+            email: stateUser.email,
+            name: stateUser.name,
+            text: textinput
+        }
+
+        setChatList([...chatList, chat]);
+        socket.emit('chat', JSON.stringify(chat));
     }
 
     return (

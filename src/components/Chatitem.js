@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { StoreContext } from '../store'
 
 const Chatitem = ({data}) => {
-    if (data.me) {
+    const { stateUser } = useContext(StoreContext);
+
+    if (data.email === stateUser.email) {
         return (
             <div className="d-flex justify-content-end">
                 <span className="chat-item-text">

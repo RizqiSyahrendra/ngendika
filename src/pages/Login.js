@@ -1,21 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Container, Form, Row, Button, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { StoreContext } from '../store'
 
-const Login = () => {
+const Login = ({history}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { stateUser, dispatchUser } = useContext(StoreContext);
 
     const onClickLogin = () => {
-        console.log(email);
-        console.log(password);
-        
+        const data = {
+            name: email,
+            email: email,
+            accessToken: 'asasasuyiuyui43'
+        };
+
+        dispatchUser({type: 'LOGIN', payload: data});
+
         clearInput();
     }
 
     const clearInput = () => {
         setEmail("");
         setPassword("");
+    }
+
+    if (stateUser.accessToken) {
+        history.push('/');
     }
 
     return (

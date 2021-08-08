@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Main from './pages/Main'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import { StoreContext } from './store'
 
 const App = () => {
   
@@ -21,9 +22,9 @@ const App = () => {
 }
 
 const PrivateRoute = ({children, path}) => {
-  const [isLogin, setIsLogin] = useState(false);
-  
-  return isLogin
+  const { stateUser } = useContext(StoreContext);
+
+  return stateUser.accessToken
     ? <Route path={path}>{children}</Route>
     : <Redirect to="/signin" />
 }

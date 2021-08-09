@@ -1,31 +1,55 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, { useState, useEffect, useContext } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import FriendCardItem from '../components/FriendCardItem'
 import Header from '../components/Header'
+import url from '../utils/url'
+import { StoreContext } from '../store'
 
 const Community = () => {
-    const [friendList, setFriendList] = useState([
-        {
-            id: 1,
-            email: 'uchihatachi@mail.com',
-            name: 'uchiha itachi'
-        },
-        {
-            id: 2,
-            email: 'uchihaobito@mail.com',
-            name: 'uchiha obito'
-        },
-        {
-            id: 3,
-            email: 'uchihamadara@mail.com',
-            name: 'uchiha madara'
-        },
-        {
-            id: 4,
-            email: 'gara@mail.com',
-            name: 'gaara'
+    const { stateUser } = useContext(StoreContext);
+    const [friendList, setFriendList] = useState([]);
+    const [friendRequest, setFriendRequest] = useState([]);
+    const [friendSuggestion, setFriendSuggestion] = useState([]);
+
+    const loadFriends = async () => {
+        try {
+            const {data} = await axios.post(url.post_friend, {token: stateUser.access_token});
+            setFriendList([...data.data]);
+        } catch (error) {
+            const {data} = error.response;
+            const errMessage = data.message ? data.message : error.message;
+            console.error(errMessage)
         }
-    ])
+    }
+
+    const loadFriendSuggestion = async () => {
+        try {
+            const {data} = await axios.post(url.post_friend_suggestion, {token: stateUser.access_token});
+            setFriendSuggestion([...data.data]);
+        } catch (error) {
+            const {data} = error.response;
+            const errMessage = data.message ? data.message : error.message;
+            console.error(errMessage)
+        }
+    }
+
+    const loadFriendRequest = async () => {
+        try {
+            const {data} = await axios.post(url.post_friend_request, {token: stateUser.access_token});
+            setFriendRequest([...data.data]);
+        } catch (error) {
+            const {data} = error.response;
+            const errMessage = data.message ? data.message : error.message;
+            console.error(errMessage)
+        }
+    }
+
+    useEffect(() => {
+        loadFriends();
+        loadFriendSuggestion();
+        loadFriendRequest();
+    }, []);
 
     return (
         <div className="main">
@@ -38,7 +62,7 @@ const Community = () => {
                                 <h5>Friend Request</h5>
                             </Col>
                             {
-                                friendList.map((friend, idxFriend) => (
+                                friendRequest.map((friend, idxFriend) => (
                                     <Col key={idxFriend} sm={12} md={12} lg={12} className="my-2">
                                         <FriendCardItem data={friend} friendRequest={true}  />
                                     </Col>
@@ -70,7 +94,7 @@ const Community = () => {
                             <Col className="py-2">
                                 <Row>
                                     {
-                                        friendList.map((friend, idxFriend) => (
+                                        friendSuggestion.map((friend, idxFriend) => (
                                             <Col key={idxFriend} sm={12} md={6} lg={4} className="my-2">
                                                 <FriendCardItem data={friend} isFriend={false} />
                                             </Col>

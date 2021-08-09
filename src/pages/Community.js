@@ -31,35 +31,53 @@ const Community = () => {
         <div className="main">
             <Header />
             <Container>
-                <Row className="my-4 community-box">
-                    <Col sm={12} md={12} lg={12} className="text-center">
-                        <h5>My Friends</h5>
-                    </Col>
-                    <Col className="py-2">
-                        <Row>
+                <Row>
+                    <Col sm={12} md={2} lg={3} className="pt-4 pe-4">
+                        <Row className="community-box">
+                            <Col sm={12} md={12} lg={12} className="text-center">
+                                <h5>Friend Request</h5>
+                            </Col>
                             {
                                 friendList.map((friend, idxFriend) => (
-                                    <Col key={idxFriend} sm={12} md={6} lg={3} className="my-2">
-                                        <FriendCardItem data={friend} isFriend={true} />
+                                    <Col key={idxFriend} sm={12} md={12} lg={12} className="my-2">
+                                        <FriendCardItem data={friend} friendRequest={true}  />
                                     </Col>
                                 ))
                             }
                         </Row>
                     </Col>
-                </Row>
-                <Row className="my-4 community-box">
-                    <Col sm={12} md={12} lg={12} className="text-center">
-                        <h5>Find Friends</h5>
-                    </Col>
-                    <Col className="py-2">
-                        <Row>
-                            {
-                                friendList.map((friend, idxFriend) => (
-                                    <Col key={idxFriend} sm={12} md={6} lg={3} className="my-2">
-                                        <FriendCardItem data={friend} isFriend={false} />
-                                    </Col>
-                                ))
-                            }
+                    <Col sm={12} md={10} lg={9}>
+                        <Row className="my-4 community-box">
+                            <Col sm={12} md={12} lg={12} className="text-center">
+                                <h5>My Friends</h5>
+                            </Col>
+                            <Col className="py-2">
+                                <Row>
+                                    {
+                                        friendList.map((friend, idxFriend) => (
+                                            <Col key={idxFriend} sm={12} md={6} lg={4} className="my-2">
+                                                <FriendCardItem data={friend} isFriend={true} />
+                                            </Col>
+                                        ))
+                                    }
+                                </Row>
+                            </Col>
+                        </Row>
+                        <Row className="my-4 community-box">
+                            <Col sm={12} md={12} lg={12} className="text-center">
+                                <h5>Find Friends</h5>
+                            </Col>
+                            <Col className="py-2">
+                                <Row>
+                                    {
+                                        friendList.map((friend, idxFriend) => (
+                                            <Col key={idxFriend} sm={12} md={6} lg={4} className="my-2">
+                                                <FriendCardItem data={friend} isFriend={false} />
+                                            </Col>
+                                        ))
+                                    }
+                                </Row>
+                            </Col>
                         </Row>
                     </Col>
                 </Row>

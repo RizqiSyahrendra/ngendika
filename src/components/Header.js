@@ -3,10 +3,11 @@ import { Container, Navbar, Nav, Button } from 'react-bootstrap'
 import { StoreContext } from '../store'
 
 const Header = () => {
-    const { dispatchUser } = useContext(StoreContext);
+    const { dispatchUser, dispatchActiveChat } = useContext(StoreContext);
 
     const onClickLogout = () => {
         dispatchUser({type: 'LOGOUT'});
+        dispatchActiveChat({type: 'CLEAR_ALL_CHAT'});
     }
 
     return (

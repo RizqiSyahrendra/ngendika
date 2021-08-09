@@ -3,11 +3,14 @@ import { Button, Col, FormControl, InputGroup, Row } from 'react-bootstrap'
 import { StoreContext } from '../store'
 
 const Chatinput = ({socket}) => {
-    const { dispatchActiveChat } = useContext(StoreContext);
+    const { stateUser, dispatchActiveChat } = useContext(StoreContext);
     const [message, setMessage] = useState('');
 
     const submitMessage = () => {
-        dispatchActiveChat({type: 'ADD_CHAT', payload: message});
+        dispatchActiveChat({type: 'SEND_CHAT', payload: {
+            user: {...stateUser},
+            message
+        }});
         setMessage('');
     }
     

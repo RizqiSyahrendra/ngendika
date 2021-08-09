@@ -4,11 +4,14 @@ import Main from './pages/Main'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import { StoreContext } from './store'
+import 'react-toastify/dist/ReactToastify.css'
+import {ToastContainer} from 'react-toastify'
 
 const App = () => {
   
   return (
     <Router>
+      <ToastContainer />
       <Switch>
         <Route exact path="/signin" component={Login} />
         <Route exact path="/signup" component={Register} />
@@ -24,7 +27,7 @@ const App = () => {
 const PrivateRoute = ({children, path}) => {
   const { stateUser } = useContext(StoreContext);
 
-  return stateUser.accessToken
+  return stateUser.access_token
     ? <Route path={path}>{children}</Route>
     : <Redirect to="/signin" />
 }

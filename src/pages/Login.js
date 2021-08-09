@@ -1,23 +1,33 @@
+import axios from 'axios'
 import React, { useState, useContext } from 'react'
 import { Container, Form, Row, Button, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { StoreContext } from '../store'
+import url from '../utils/url'
 
 const Login = ({history}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { stateUser, dispatchUser } = useContext(StoreContext);
 
-    const onClickLogin = () => {
-        const data = {
-            name: email,
+    const onClickLogin = async () => {
+        const dataLogin = {
             email: email,
-            accessToken: 'asasasuyiuyui43'
+            password: password,
+            token: process.env.REACT_APP_API_SECRET
         };
 
-        dispatchUser({type: 'LOGIN', payload: data});
+        try {
+            const {data} = await axios.post(url.post_auth_login, dataLogin);
+            dispatchUser({type: 'LOGIN', payload: data.data});
+            clearInput();
+        } catch (error) {
+            const {data} = error.response;
+            const errMessage = data.message ? data.message : error.message;
+            toast.error(errMessage);
+        }
 
-        clearInput();
     }
 
     const clearInput = () => {
@@ -25,7 +35,7 @@ const Login = ({history}) => {
         setPassword("");
     }
 
-    if (stateUser.accessToken) {
+    if (stateUser.access_token) {
         history.push('/');
     }
 

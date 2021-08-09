@@ -1,11 +1,41 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import { Container, Form, Row, Button, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import url from '../utils/url'
 
 const Register = () => {
+    const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
 
-    const onClickLogin = () => {
-        console.log('as');
+    const onClickLogin = async () => {
+        try {
+            const dataRegister = {
+                email,
+                name,
+                password,
+                confirm_password: confirmPassword,
+                token: process.env.REACT_APP_API_SECRET
+            };  
+
+            const {data} = await axios.post(url.post_auth_register, dataRegister);
+            toast.success(data.message);
+            clearInput();
+        } catch (error) {
+            const {data} = error.response;
+            const errMessage = data.message ? data.message : error.message;
+            toast.error(errMessage);
+        }
+    }
+
+    const clearInput = () => {
+        setEmail("");
+        setName("");
+        setPassword("");
+        setConfirmPassword("");
     }
 
     return (
@@ -20,19 +50,19 @@ const Register = () => {
                         <Form>
                             <Form.Group className="mb-3">
                                 <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" />
+                                <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter name" />
+                                <Form.Control type="text" placeholder="Enter name" value={name} onChange={e => setName(e.target.value)} />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" />
+                                <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Password Confirmation</Form.Label>
-                                <Form.Control type="password" placeholder="Password Confirmation" />
+                                <Form.Control type="password" placeholder="Password Confirmation" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
                             </Form.Group>
                             <div>
                                 <Button variant="secondary" type="button" onClick={onClickLogin}>

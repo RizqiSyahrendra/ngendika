@@ -3,9 +3,11 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import Main from './pages/Main'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Profile from './pages/Profile'
 import { StoreContext } from './store'
 import 'react-toastify/dist/ReactToastify.css'
 import {ToastContainer} from 'react-toastify'
+import Community from './pages/Community'
 
 const App = () => {
   
@@ -18,6 +20,8 @@ const App = () => {
 
         <PrivateRoute>
           <Route exact path="/" component={Main} />
+          <Route exact path="/community" component={Community} />
+          <Route exact path="/profile" component={Profile} />
         </PrivateRoute>
       </Switch>
     </Router>

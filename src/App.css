@@ -93,3 +93,22 @@
 .chat-list-item.active {
   background: var(--bgmainlighter);
 }
+
+.community-box {
+  background: var(--bgmainlighter);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.person-item {
+  border-radius: 10px;
+  border: 2px solid var(--bgmain);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  cursor: pointer;
+}
+
+.person-item .mail {
+  font-size: 12px;
+  color: var(--fontsecondary);
+}

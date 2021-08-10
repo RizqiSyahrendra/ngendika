@@ -45,6 +45,14 @@ const Community = () => {
         }
     }
 
+    const cbAddFriend = (id) => {
+        setFriendSuggestion([...friendSuggestion.filter(x => x.id !== id)]);
+    }
+
+    const cbRemoveFriend = (id) => {
+        setFriendList([...friendRequest.filter(x => x.id !== id)]);
+    }
+
     useEffect(() => {
         loadFriends();
         loadFriendSuggestion();
@@ -64,7 +72,7 @@ const Community = () => {
                             {
                                 friendRequest.map((friend, idxFriend) => (
                                     <Col key={idxFriend} sm={12} md={12} lg={12} className="my-2">
-                                        <FriendCardItem data={friend} friendRequest={true}  />
+                                        <FriendCardItem data={friend} friendRequest={true} callback={cbRemoveFriend}  />
                                     </Col>
                                 ))
                             }
@@ -80,7 +88,7 @@ const Community = () => {
                                     {
                                         friendList.map((friend, idxFriend) => (
                                             <Col key={idxFriend} sm={12} md={6} lg={4} className="my-2">
-                                                <FriendCardItem data={friend} isFriend={true} />
+                                                <FriendCardItem data={friend} isFriend={true} callback={cbRemoveFriend} />
                                             </Col>
                                         ))
                                     }
@@ -96,7 +104,7 @@ const Community = () => {
                                     {
                                         friendSuggestion.map((friend, idxFriend) => (
                                             <Col key={idxFriend} sm={12} md={6} lg={4} className="my-2">
-                                                <FriendCardItem data={friend} isFriend={false} />
+                                                <FriendCardItem data={friend} isFriend={false} callback={cbAddFriend} />
                                             </Col>
                                         ))
                                     }

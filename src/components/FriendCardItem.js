@@ -1,20 +1,37 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, { useState, useContext } from 'react'
 import { Button } from 'react-bootstrap'
+import { toast } from 'react-toastify'
 import { confirmAlert } from '../utils/alert'
+import url from '../utils/url'
+import { StoreContext } from '../store'
 
 
-const FriendCardItem = ({data, isFriend, friendRequest}) => {
+const FriendCardItem = ({data, isFriend, friendRequest, callback}) => {
     const [isBtnAddActive, setIsBtnAddActive] = useState(true)
     const [isBtnRemoveActive, setIsBtnRemoveActive] = useState(true)
     const [isBtnConfirmActive, setIsBtnConfirmActive] = useState(true)
+    const { stateUser } = useContext(StoreContext)
 
     const handleAdd = (id) => {
         setIsBtnAddActive(false);
         confirmAlert("Do you want to add friend?", addFriend, id, () => setIsBtnAddActive(true));
     }
 
-    const addFriend = (id) => {
+    const addFriend = async (id) => {
+        try {
+            const {data} = await axios.post(url.post_friend_add, {
+                token: stateUser.access_token,
+                friend_id: id
+            });
 
+            toast.success(data.message);
+            callback(id);
+        } catch (error) {
+            const {data} = error.response;
+            const errMessage = data.message ? data.message : error.message;
+            toast.error(errMessage);
+        }
     }
 
     const handleRemove = (id) => {
@@ -22,8 +39,23 @@ const FriendCardItem = ({data, isFriend, friendRequest}) => {
         confirmAlert("Do you want to remove friend?", removeFriend, id, () => setIsBtnRemoveActive(true));
     }
 
-    const removeFriend = (id) => {
+    const removeFriend = async (id) => {
+        try {
+            const {data} = await axios.delete(url.delete_friend_request, {
+                headers:{'Content-Type': 'application/json; charset=utf-8'},
+                data: {
+                    token: stateUser.access_token,
+                    friend_id: id
+                }
+            });
 
+            toast.success(data.message);
+            callback(id);
+        } catch (error) {
+            const {data} = error.response;
+            const errMessage = data.message ? data.message : error.message;
+            toast.error(errMessage);
+        }
     }
 
     const handleConfirm = (id) => {

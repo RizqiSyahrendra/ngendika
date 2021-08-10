@@ -11,11 +11,10 @@ import { io } from 'socket.io-client';
 import { StoreContext } from '../store';
 import WelcomeChatScreen from '../components/WelcomeChatScreen';
 
-const socket = io("ws://localhost:5000", {transports: ["websocket", "polling"]});
+const socket = io("ws://localhost:5000", {transports: ["websocket", "polling"], autoConnect: false});
 socket.on("connect_error", () => {
-    // revert to classic upgrade
-    // console.error('failed to connect ws server');
-    // socket.io.opts.transports = ["polling", "websocket"];
+    console.error('failed to connect ws server');
+    socket.io.opts.transports = ["polling", "websocket"];
 });
 
 const Main = () => { 
@@ -27,7 +26,7 @@ const Main = () => {
             <Container>
                 <Row>
                     <Col lg={3} className="py-3 chat-list-box">
-                        <FriendListScreen />
+                        <FriendListScreen socket={socket} />
                     </Col>
                     <Col lg={9}>
                         {

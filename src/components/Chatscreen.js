@@ -6,15 +6,11 @@ import { StoreContext } from '../store'
 const Chatscreen = ({socket}) => {
     const { stateActiveChat } = useContext(StoreContext);
 
-    // useEffect(() => {
-    //     socket.on('chat-masuk', (msg) => {
-    //         const msgObj = JSON.parse(msg);
-    //         if (msgObj.email !== stateUser.email) {
-    //             setChatList([...chatList, msgObj]);
-    //         }
-    //     });
-    
-    // }, [chatList]);
+    useEffect(() => {
+        socket.on('private-message', ({to, message}) => {
+            alert(message);
+        });
+    }, []);
 
     return (
         <div className="py-4 chat-screen">

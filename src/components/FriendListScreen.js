@@ -3,6 +3,7 @@ import FriendListItem from './FriendListItem'
 import { StoreContext } from '../store'
 import axios from 'axios'
 import url from '../utils/url'
+import errorMessage from '../utils/errorMessage'
 
 const FriendListScreen = () => {
     const { stateUser, stateActiveChat, dispatchActiveChat } = useContext(StoreContext);
@@ -17,9 +18,7 @@ const FriendListScreen = () => {
             const {data} = await axios.post(url.post_friend, {token: stateUser.access_token});
             setFriendList([...data.data]);
         } catch (error) {
-            const {data} = error.response;
-            const errMessage = data.message ? data.message : error.message;
-            console.error(errMessage)
+            console.error(errorMessage(error));
         }
     }
 

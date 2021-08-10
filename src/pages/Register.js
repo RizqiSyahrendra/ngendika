@@ -4,6 +4,7 @@ import { Container, Form, Row, Button, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import url from '../utils/url'
+import errorMessage from '../utils/errorMessage'
 
 const Register = () => {
     const [email, setEmail] = useState('')
@@ -25,9 +26,7 @@ const Register = () => {
             toast.success(data.message);
             clearInput();
         } catch (error) {
-            const {data} = error.response;
-            const errMessage = data.message ? data.message : error.message;
-            toast.error(errMessage);
+            toast.error(errorMessage(error));
         }
     }
 

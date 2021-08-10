@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { confirmAlert } from '../utils/alert'
 import url from '../utils/url'
 import { StoreContext } from '../store'
+import errorMessage from '../utils/errorMessage'
 
 
 const FriendCardItem = ({data, isFriend, friendRequest, callback}) => {
@@ -28,9 +29,7 @@ const FriendCardItem = ({data, isFriend, friendRequest, callback}) => {
             toast.success(data.message);
             callback(id);
         } catch (error) {
-            const {data} = error.response;
-            const errMessage = data.message ? data.message : error.message;
-            toast.error(errMessage);
+            toast.error(errorMessage(error));
         }
     }
 
@@ -52,9 +51,7 @@ const FriendCardItem = ({data, isFriend, friendRequest, callback}) => {
             toast.success(data.message);
             callback(id);
         } catch (error) {
-            const {data} = error.response;
-            const errMessage = data.message ? data.message : error.message;
-            toast.error(errMessage);
+            toast.error(errorMessage(error));
         }
     }
 
@@ -76,9 +73,7 @@ const FriendCardItem = ({data, isFriend, friendRequest, callback}) => {
             toast.success(data.message);
             callback(id, 'deny');
         } catch (error) {
-            const {data} = error.response;
-            const errMessage = data.message ? data.message : error.message;
-            toast.error(errMessage);
+            toast.error(errorMessage(error));
         }
     }
 
@@ -97,9 +92,7 @@ const FriendCardItem = ({data, isFriend, friendRequest, callback}) => {
             toast.success(data.message);
             callback(id, 'confirm');
         } catch (error) {
-            const {data} = error.response;
-            const errMessage = data.message ? data.message : error.message;
-            toast.error(errMessage);
+            toast.error(errorMessage(error));
         }
     }
 

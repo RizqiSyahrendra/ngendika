@@ -5,6 +5,7 @@ import FriendCardItem from '../components/FriendCardItem'
 import Header from '../components/Header'
 import url from '../utils/url'
 import { StoreContext } from '../store'
+import errorMessage from '../utils/errorMessage'
 
 const Community = () => {
     const { stateUser } = useContext(StoreContext);
@@ -17,9 +18,7 @@ const Community = () => {
             const {data} = await axios.post(url.post_friend, {token: stateUser.access_token});
             setFriendList([...data.data]);
         } catch (error) {
-            const {data} = error.response;
-            const errMessage = data.message ? data.message : error.message;
-            console.error(errMessage)
+            console.error(errorMessage(error));
         }
     }
 
@@ -28,9 +27,7 @@ const Community = () => {
             const {data} = await axios.post(url.post_friend_suggestion, {token: stateUser.access_token});
             setFriendSuggestion([...data.data]);
         } catch (error) {
-            const {data} = error.response;
-            const errMessage = data.message ? data.message : error.message;
-            console.error(errMessage)
+            console.error(errorMessage(error));
         }
     }
 
@@ -39,9 +36,7 @@ const Community = () => {
             const {data} = await axios.post(url.post_friend_request, {token: stateUser.access_token});
             setFriendRequest([...data.data]);
         } catch (error) {
-            const {data} = error.response;
-            const errMessage = data.message ? data.message : error.message;
-            console.error(errMessage)
+            console.error(errorMessage(error));
         }
     }
 

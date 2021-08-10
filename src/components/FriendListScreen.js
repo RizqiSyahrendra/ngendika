@@ -1,21 +1,27 @@
 import React, { useState, useContext, useEffect } from 'react'
 import FriendListItem from './FriendListItem'
 import { StoreContext } from '../store'
+import axios from 'axios'
+import url from '../utils/url'
 
 const FriendListScreen = () => {
-    const { stateActiveChat, dispatchActiveChat } = useContext(StoreContext);
-    const [friendList, setFriendList] = useState([
-        {
-            id: 1,
-            email: 'sasuke@mail.com',
-            name: 'Sasuke'
-        },
-        {
-            id: 2,
-            email: 'sakura@mail.com',
-            name: 'Sakura'
+    const { stateUser, stateActiveChat, dispatchActiveChat } = useContext(StoreContext);
+    const [friendList, setFriendList] = useState([]);
+
+    useEffect(() => {
+       loadFriends();
+    }, []);
+
+    const loadFriends = async () => {
+        try {
+            const {data} = await axios.post(url.post_friend, {token: stateUser.access_token});
+            setFriendList([...data.data]);
+        } catch (error) {
+            const {data} = error.response;
+            const errMessage = data.message ? data.message : error.message;
+            console.error(errMessage)
         }
-    ]);
+    }
 
     return (
         <div>

@@ -7,8 +7,9 @@ const FriendListItem = ({data, isActive, onClick}) => {
         <div className={`d-flex chat-list-item ${isActive ? 'active' : ''}`} onClick={onClick}>
             <span className="chat-item-pict mt-1">
             </span>
-            <div className="d-flex ps-1 align-items-center">
+            <div className="d-flex flex-column flex-wrap ps-1 justify-content-center">
                 <span>{data.name}</span>
+            <span className="mail">{data.email}</span>
             </div>
         </div>
     )

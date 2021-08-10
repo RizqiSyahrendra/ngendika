@@ -112,3 +112,8 @@
   font-size: 12px;
   color: var(--fontsecondary);
 }
+
+.chat-list-item .mail {
+  font-size: 12px;
+  color: var(--fontsecondary);
+}

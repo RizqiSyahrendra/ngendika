@@ -38,7 +38,14 @@ const activeChatReducer = (state, action) => {
             return newState;
         
         case 'RECEIVE_CHAT':
-            
+            console.log('asas');
+            newState.chatList = [...newState.chatList, {
+                id: null, 
+                user_id: payload.from.user_id, 
+                user_email: payload.from.email, 
+                text: payload.message
+            }];
+            localStorage.setItem(`chatList_${payload.from.email}`, JSON.stringify([...newState.chatList]));
             return newState;
         
         case 'CLEAR_ALL_CHAT':

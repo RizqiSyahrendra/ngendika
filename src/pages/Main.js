@@ -9,15 +9,15 @@ import Chatinput from '../components/Chatinput';
 import FriendListScreen from '../components/FriendListScreen';
 import { StoreContext } from '../store';
 import WelcomeChatScreen from '../components/WelcomeChatScreen';
-import socket from '../utils/socket';
+import socket, { initSocket } from '../utils/socket';
 
 const Main = () => { 
-    const { stateActiveChat } = useContext(StoreContext);
+    const { stateUser, stateActiveChat, dispatchActiveChat } = useContext(StoreContext);
 
     useEffect(() => {
-        
-        socket.on('private-message', ({to, message}) => {
-            alert(message);
+        initSocket(stateUser);
+        socket.on('private-message-incoming', ({from, message}) => {
+            dispatchActiveChat({type: 'RECEIVE_CHAT', payload: {from, message}});
         });
 
     }, [])

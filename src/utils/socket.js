@@ -13,7 +13,7 @@ export const initSocket = (user) => {
 }
 
 export const disconnectSocket = () => {
-    socket.disconnect();
+    socket.disconnect()
 }
 
 export const sendMessage = (to, message) => {

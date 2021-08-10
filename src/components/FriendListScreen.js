@@ -4,13 +4,12 @@ import { StoreContext } from '../store'
 import axios from 'axios'
 import url from '../utils/url'
 
-const FriendListScreen = ({socket}) => {
+const FriendListScreen = () => {
     const { stateUser, stateActiveChat, dispatchActiveChat } = useContext(StoreContext);
     const [friendList, setFriendList] = useState([]);
 
     useEffect(() => {
         loadFriends();
-        listenChat();
     }, []);
 
     const loadFriends = async () => {
@@ -26,11 +25,6 @@ const FriendListScreen = ({socket}) => {
 
     const handleClickFriend = (friend) => {
         dispatchActiveChat({type: 'SET_ACTIVE', payload: friend});
-    }
-
-    const listenChat = () => {
-        socket.auth = {...stateUser};
-        socket.connect();
     }
 
     return (

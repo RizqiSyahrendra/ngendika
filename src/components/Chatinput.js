@@ -2,16 +2,11 @@ import React, { useState, useContext } from 'react'
 import { Button, Col, FormControl, InputGroup, Row } from 'react-bootstrap'
 import { StoreContext } from '../store'
 
-const Chatinput = ({socket}) => {
-    const { stateUser, stateActiveChat, dispatchActiveChat } = useContext(StoreContext);
+const Chatinput = () => {
+    const { stateUser, dispatchActiveChat } = useContext(StoreContext);
     const [message, setMessage] = useState('');
 
     const submitMessage = () => {
-        socket.emit('private-message', {
-            to: stateActiveChat.user,
-            message
-        });
-
         dispatchActiveChat({type: 'SEND_CHAT', payload: {
             user: {...stateUser},
             message

@@ -1,16 +1,10 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import Chatitem from './Chatitem'
 import { StoreContext } from '../store'
 
-const Chatscreen = ({socket}) => {
+const Chatscreen = () => {
     const { stateActiveChat } = useContext(StoreContext);
-
-    useEffect(() => {
-        socket.on('private-message', ({to, message}) => {
-            alert(message);
-        });
-    }, []);
 
     return (
         <div className="py-4 chat-screen">

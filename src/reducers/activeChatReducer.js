@@ -1,3 +1,5 @@
+import { sendMessage } from '../utils/socket'
+
 const activeChatInitialState = {
     user: {
         id: 0,
@@ -32,6 +34,11 @@ const activeChatReducer = (state, action) => {
             const tempChatList = [...newState.chatList];
             const {email} = state.user;
             localStorage.setItem(`chatList_${email}`, JSON.stringify(tempChatList));
+            sendMessage(state.user, payload.message);
+            return newState;
+        
+        case 'RECEIVE_CHAT':
+            
             return newState;
         
         case 'CLEAR_ALL_CHAT':

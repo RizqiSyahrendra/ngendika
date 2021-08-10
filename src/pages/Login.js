@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { StoreContext } from '../store'
 import url from '../utils/url'
+import errorMessage from '../utils/errorMessage'
 
 const Login = ({history}) => {
     const [email, setEmail] = useState('');
@@ -23,9 +24,7 @@ const Login = ({history}) => {
             dispatchUser({type: 'LOGIN', payload: data.data});
             clearInput();
         } catch (error) {
-            const {data} = error.response;
-            const errMessage = data.message ? data.message : error.message;
-            toast.error(errMessage);
+            toast.error(errorMessage(error));
         }
 
     }

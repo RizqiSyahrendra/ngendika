@@ -58,13 +58,49 @@ const FriendCardItem = ({data, isFriend, friendRequest, callback}) => {
         }
     }
 
+    const handleDeny = (id) => {
+        setIsBtnRemoveActive(false);
+        confirmAlert("Do you want to remove friend?", denyFriend, id, () => setIsBtnRemoveActive(true));
+    }
+
+    const denyFriend = async (id) => {
+        try {
+            const {data} = await axios.delete(url.delete_friend_request, {
+                headers:{'Content-Type': 'application/json; charset=utf-8'},
+                data: {
+                    token: stateUser.access_token,
+                    friend_id: id
+                }
+            });
+
+            toast.success(data.message);
+            callback(id, 'deny');
+        } catch (error) {
+            const {data} = error.response;
+            const errMessage = data.message ? data.message : error.message;
+            toast.error(errMessage);
+        }
+    }
+
     const handleConfirm = (id) => {
         setIsBtnConfirmActive(false);
         confirmAlert("Do you want to confirm friend?", confirmFriend, id, () => setIsBtnConfirmActive(true));
     }
 
-    const confirmFriend = (id) => {
+    const confirmFriend = async (id) => {
+        try {
+            const {data} = await axios.put(url.put_friend_confirm, {
+                token: stateUser.access_token,
+                friend_id: id
+            });
 
+            toast.success(data.message);
+            callback(id, 'confirm');
+        } catch (error) {
+            const {data} = error.response;
+            const errMessage = data.message ? data.message : error.message;
+            toast.error(errMessage);
+        }
     }
 
     return (
@@ -79,7 +115,7 @@ const FriendCardItem = ({data, isFriend, friendRequest, callback}) => {
                         friendRequest ?  (
                             <>
                             <Button disabled={!isBtnConfirmActive} onClick={() => handleConfirm(data.id)} size="sm" variant="primary" className="mx-2">Confirm</Button>
-                            <Button disabled={!isBtnRemoveActive} onClick={() => handleRemove(data.id)} size="sm" variant="danger">Remove</Button> 
+                            <Button disabled={!isBtnRemoveActive} onClick={() => handleDeny(data.id)} size="sm" variant="danger">Remove</Button> 
                             </>
                         ):
                         isFriend ? 

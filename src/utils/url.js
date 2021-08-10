@@ -8,7 +8,7 @@ const url = {
     post_friend_suggestion: host + '/friend/suggestion',
     post_friend_request: host + '/friend/request',
     post_friend_add: host + '/friend/add',
-    put_friend_request: host + '/friend/confirm',
+    put_friend_confirm: host + '/friend/confirm',
     delete_friend_request: host + '/friend/remove',
 };
 

@@ -50,7 +50,20 @@ const Community = () => {
     }
 
     const cbRemoveFriend = (id) => {
-        setFriendList([...friendRequest.filter(x => x.id !== id)]);
+        setFriendList([...friendList.filter(x => x.id !== id)]);
+    }
+
+    const cbFriendRequest = (id, type) => {
+        let selected = [...friendRequest.filter(x => x.id === id)];
+
+        if (type === 'confirm') {
+            setFriendList([...friendList, selected[0]]);
+        }
+        else if (type === 'deny') {
+            setFriendSuggestion([...friendSuggestion, selected[0]]);
+        }
+
+        setFriendRequest([...friendRequest.filter(x => x.id !== id)]);
     }
 
     useEffect(() => {
@@ -72,7 +85,7 @@ const Community = () => {
                             {
                                 friendRequest.map((friend, idxFriend) => (
                                     <Col key={idxFriend} sm={12} md={12} lg={12} className="my-2">
-                                        <FriendCardItem data={friend} friendRequest={true} callback={cbRemoveFriend}  />
+                                        <FriendCardItem data={friend} friendRequest={true} callback={cbFriendRequest}  />
                                     </Col>
                                 ))
                             }

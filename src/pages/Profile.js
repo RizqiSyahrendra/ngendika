@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { useRef, useState, useContext, useEffect } from 'react'
 import { Col, Container, Form, Image, Row, Button } from 'react-bootstrap'
 import { toast } from 'react-toastify'
-import Header from '../components/Header'
 import { StoreContext } from '../store'
 import errorMessage from '../utils/errorMessage'
 import url from '../utils/url'
@@ -81,7 +80,6 @@ const Profile = () => {
 
     return (
         <div className="main">
-            <Header />
                 <Container className="py-3">
                     <Row>
                         <Col sm={12} md={12} lg={12} className="text-center py-4">

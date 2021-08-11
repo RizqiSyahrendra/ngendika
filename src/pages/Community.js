@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import FriendCardItem from '../components/FriendCardItem'
-import Header from '../components/Header'
 import url from '../utils/url'
 import { StoreContext } from '../store'
 import errorMessage from '../utils/errorMessage'
@@ -69,7 +68,6 @@ const Community = () => {
 
     return (
         <div className="main">
-            <Header />
             <Container>
                 <Row>
                     <Col sm={12} md={2} lg={3} className="pt-4 pe-4">

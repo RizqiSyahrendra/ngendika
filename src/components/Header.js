@@ -19,7 +19,7 @@ const Header = () => {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="ms-auto navbar-center">
+                    <Nav className="ms-auto d-none d-md-flex d-lg-flex">
                         <LinkContainer exact to="/">
                             <Nav.Link className="px-2 d-flex flex-column align-items-center justify-content-end">
                                 <i class="far fa-comment-dots"></i>

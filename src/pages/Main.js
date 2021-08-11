@@ -3,7 +3,6 @@ import '../App.css';
 
 import React, { useContext } from 'react'
 import { Col, Container, Row } from 'react-bootstrap';
-import Header from '../components/Header';
 import Chatscreen from '../components/Chatscreen';
 import Chatinput from '../components/Chatinput';
 import FriendListScreen from '../components/FriendListScreen';
@@ -15,10 +14,9 @@ const Main = () => {
 
     return (
         <div className="main">
-            <Header />
             <Container>
                 <Row>
-                    <Col lg={3} className="py-3 chat-list-box">
+                    <Col lg={3} className="py-2 chat-list-box">
                         <FriendListScreen />
                     </Col>
                     <Col lg={9}>

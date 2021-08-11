@@ -10,6 +10,9 @@ const url = {
     post_friend_add: host + '/friend/add',
     put_friend_confirm: host + '/friend/confirm',
     delete_friend_request: host + '/friend/remove',
+
+    post_chat: host + '/chat',
+    post_chat_add: host + '/chat/add',
 };
 
 export default url;

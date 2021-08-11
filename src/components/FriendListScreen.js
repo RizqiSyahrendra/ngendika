@@ -22,8 +22,13 @@ const FriendListScreen = () => {
         }
     }
 
-    const handleClickFriend = (friend) => {
-        dispatchActiveChat({type: 'SET_ACTIVE', payload: friend});
+    const handleClickFriend = async (friend) => {
+        try {
+            const { data } = await axios.post(url.post_chat, {token: stateUser.access_token, friend_id: friend.id});
+            dispatchActiveChat({type: 'SET_ACTIVE', payload: {friend, data: data.data}});
+        } catch (error) {
+            dispatchActiveChat({type: 'SET_ACTIVE', payload: {friend, data: []}});
+        }
     }
 
     return (

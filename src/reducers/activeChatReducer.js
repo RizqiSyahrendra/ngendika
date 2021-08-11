@@ -15,12 +15,13 @@ const activeChatReducer = (state, action) => {
 
     switch (action.type) {
         case 'SET_ACTIVE':
-            newState.user = {...payload};
-            newState.chatList = [
-                ...localStorage.getItem(`chatList_${payload.email}`) ?
-                    JSON.parse(localStorage.getItem(`chatList_${payload.email}`)) :
-                    []
-            ];
+            newState.user = {...payload.friend};
+            // newState.chatList = [
+            //     ...localStorage.getItem(`chatList_${payload.email}`) ?
+            //         JSON.parse(localStorage.getItem(`chatList_${payload.email}`)) :
+            //         []
+            // ];
+            newState.chatList = [...payload.data];
             return newState;
         
         case 'SEND_CHAT':
@@ -38,7 +39,6 @@ const activeChatReducer = (state, action) => {
             return newState;
         
         case 'RECEIVE_CHAT':
-            console.log('asas');
             newState.chatList = [...newState.chatList, {
                 id: null, 
                 user_id: payload.from.user_id, 

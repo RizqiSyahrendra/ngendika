@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import { Container, Navbar, Nav, Button } from 'react-bootstrap'
+import { Container, Navbar, Nav, Button, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap';
 import { StoreContext } from '../store'
 
 const Header = () => {
-    const { dispatchUser, dispatchActiveChat } = useContext(StoreContext);
+    const { stateUser, dispatchUser, dispatchActiveChat } = useContext(StoreContext);
 
     const onClickLogout = () => {
         dispatchUser({type: 'LOGOUT'});
@@ -31,7 +31,9 @@ const Header = () => {
                         </LinkContainer>
                     </Nav>
                     <Nav className="ms-auto">
-                        <Button size="sm" variant="danger" onClick={onClickLogout}>Sign Out</Button>
+                        <NavDropdown title={`Hi, ${stateUser.name}`} id="collasible-nav-dropdown">
+                            <NavDropdown.Item onClick={onClickLogout}>Sign Out</NavDropdown.Item>
+                        </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -115,15 +115,15 @@ const Profile = () => {
                             <Form>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Old Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Enter old password" onChange={e => setOldPassword(e.target.value)} />
+                                    <Form.Control type="password" value={oldPassword} placeholder="Enter old password" onChange={e => setOldPassword(e.target.value)} />
                                 </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Form.Label>New Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Enter password" onChange={e => setPassword(e.target.value)} />
+                                    <Form.Control type="password" value={password} placeholder="Enter password" onChange={e => setPassword(e.target.value)} />
                                 </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Form.Label>New Password Confirmation</Form.Label>
-                                    <Form.Control type="password" placeholder="Enter confirmation password" onChange={e => setConfirmPassword(e.target.value)} />
+                                    <Form.Control type="password" value={confirmPassword} placeholder="Enter confirmation password" onChange={e => setConfirmPassword(e.target.value)} />
                                 </Form.Group>
                                 <div>
                                     <Button variant="primary" onClick={onSaveProfile}>

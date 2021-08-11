@@ -19,15 +19,24 @@ const Header = () => {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="ms-auto">
+                    <Nav className="ms-auto navbar-center">
                         <LinkContainer exact to="/">
-                            <Nav.Link className="px-2">Chat</Nav.Link>
+                            <Nav.Link className="px-2 d-flex flex-column align-items-center">
+                                <i class="far fa-comment-dots"></i>
+                                <span>Chat</span>
+                            </Nav.Link>
                         </LinkContainer>
                         <LinkContainer exact to="/community">
-                            <Nav.Link className="px-2">Community</Nav.Link>
+                            <Nav.Link className="px-2 d-flex flex-column align-items-center">
+                                <i class="fas fa-users"></i>
+                                <span>Community</span>
+                            </Nav.Link>
                         </LinkContainer>
                         <LinkContainer exact to="/profile">
-                            <Nav.Link className="px-2">Profile</Nav.Link>
+                            <Nav.Link className="px-2 d-flex flex-column align-items-center">
+                                <i class="fas fa-user"></i>
+                                <span>Profile</span>
+                            </Nav.Link>
                         </LinkContainer>
                     </Nav>
                     <Nav className="ms-auto">

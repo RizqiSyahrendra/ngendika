@@ -12,18 +12,39 @@ import socket from './utils/socket'
 import Header from './components/Header'
 import HeaderChatRoom from './components/HeaderChatRoom'
 import Bottombar from './components/Bottombar'
+import errorMessage from './utils/errorMessage'
+import axios from 'axios'
+import url from './utils/url'
 
 const App = () => {
-  const { dispatchActiveChat } = useContext(StoreContext);
+  const { stateUser, stateActiveChat, dispatchActiveChat, stateFriendList, dispatchFriendList } = useContext(StoreContext);
 
   useEffect(() => {
 
     socket.on('private-message-incoming', ({from, message}) => {
-        dispatchActiveChat({type: 'RECEIVE_CHAT', payload: {from, message}});
+      dispatchActiveChat({type: 'RECEIVE_CHAT', payload: {from, message}});
+      
+      if (from.user_id !== stateActiveChat.user.id) {
+          updateUnreadMessage(from);
+          dispatchFriendList({type: 'SET_UNREAD', payload: from});
+        }
     });
 
-}, [])
+  }, []);
 
+  const updateUnreadMessage = async (from) => {
+    try {
+      let tempFriendList = [...stateFriendList].filter(x => x.id === from.user_id);
+      let tempFriend = tempFriendList[0];
+      await axios.put(url.put_chat_update_unread, {
+        token: stateUser.access_token,
+        friend_id: from.user_id,
+        unread: tempFriend.unread_chat + 1
+      });
+    } catch (error) {
+      console.error(errorMessage(error));
+    }
+  }
   
   return (
     <Router>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image } from 'react-bootstrap'
+import { Badge, Image } from 'react-bootstrap'
 import url from '../utils/url'
 
 const FriendListItem = ({data, isActive, onClick}) => {
@@ -12,7 +12,10 @@ const FriendListItem = ({data, isActive, onClick}) => {
             </span>
             <div className="d-flex flex-column flex-wrap ps-1 justify-content-center">
                 <span>{data.name}</span>
-            <span className="mail">{data.email}</span>
+                <span className="mail">{data.email}</span>
+            </div>
+            <div className="pl-2">
+                {data.unread_chat > 0 ? <Badge bg="danger">{data.unread_chat}</Badge> : ''}
             </div>
         </div>
     )

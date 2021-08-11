@@ -15,6 +15,7 @@ const url = {
 
     post_chat: host + '/chat',
     post_chat_add: host + '/chat/add',
+    put_chat_update_unread: host + '/chat/update-unread',
 
     uploads: host + '/uploads/',
 };

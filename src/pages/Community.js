@@ -67,60 +67,58 @@ const Community = () => {
     }, []);
 
     return (
-        <div className="main">
-            <Container>
-                <Row>
-                    <Col sm={12} md={2} lg={3} className="pt-4 pe-4">
-                        <Row className="community-box">
-                            <Col sm={12} md={12} lg={12} className="text-center">
-                                <h5>Friend Request</h5>
-                            </Col>
-                            {
-                                friendRequest.map((friend, idxFriend) => (
-                                    <Col key={idxFriend} sm={12} md={12} lg={12} className="my-2">
-                                        <FriendCardItem data={friend} friendRequest={true} callback={cbFriendRequest}  />
-                                    </Col>
-                                ))
-                            }
-                        </Row>
-                    </Col>
-                    <Col sm={12} md={10} lg={9}>
-                        <Row className="my-4 community-box">
-                            <Col sm={12} md={12} lg={12} className="text-center">
-                                <h5>My Friends</h5>
-                            </Col>
-                            <Col className="py-2">
-                                <Row>
-                                    {
-                                        friendList.map((friend, idxFriend) => (
-                                            <Col key={idxFriend} sm={12} md={6} lg={4} className="my-2">
-                                                <FriendCardItem data={friend} isFriend={true} callback={cbRemoveFriend} />
-                                            </Col>
-                                        ))
-                                    }
-                                </Row>
-                            </Col>
-                        </Row>
-                        <Row className="my-4 community-box">
-                            <Col sm={12} md={12} lg={12} className="text-center">
-                                <h5>Find Friends</h5>
-                            </Col>
-                            <Col className="py-2">
-                                <Row>
-                                    {
-                                        friendSuggestion.map((friend, idxFriend) => (
-                                            <Col key={idxFriend} sm={12} md={6} lg={4} className="my-2">
-                                                <FriendCardItem data={friend} isFriend={false} callback={cbAddFriend} />
-                                            </Col>
-                                        ))
-                                    }
-                                </Row>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-            </Container>
-        </div>
+        <Container>
+            <Row>
+                <Col sm={12} md={2} lg={3} className="pt-4 pe-4">
+                    <Row className="community-box">
+                        <Col sm={12} md={12} lg={12} className="text-center">
+                            <h5>Friend Request</h5>
+                        </Col>
+                        {
+                            friendRequest.map((friend, idxFriend) => (
+                                <Col key={idxFriend} sm={12} md={12} lg={12} className="my-2">
+                                    <FriendCardItem data={friend} friendRequest={true} callback={cbFriendRequest}  />
+                                </Col>
+                            ))
+                        }
+                    </Row>
+                </Col>
+                <Col sm={12} md={10} lg={9}>
+                    <Row className="my-4 community-box">
+                        <Col sm={12} md={12} lg={12} className="text-center">
+                            <h5>My Friends</h5>
+                        </Col>
+                        <Col className="py-2">
+                            <Row>
+                                {
+                                    friendList.map((friend, idxFriend) => (
+                                        <Col key={idxFriend} sm={12} md={6} lg={4} className="my-2">
+                                            <FriendCardItem data={friend} isFriend={true} callback={cbRemoveFriend} />
+                                        </Col>
+                                    ))
+                                }
+                            </Row>
+                        </Col>
+                    </Row>
+                    <Row className="my-4 community-box">
+                        <Col sm={12} md={12} lg={12} className="text-center">
+                            <h5>Find Friends</h5>
+                        </Col>
+                        <Col className="py-2">
+                            <Row>
+                                {
+                                    friendSuggestion.map((friend, idxFriend) => (
+                                        <Col key={idxFriend} sm={12} md={6} lg={4} className="my-2">
+                                            <FriendCardItem data={friend} isFriend={false} callback={cbAddFriend} />
+                                        </Col>
+                                    ))
+                                }
+                            </Row>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 

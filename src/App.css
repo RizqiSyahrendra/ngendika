@@ -172,3 +172,9 @@
   left: -70px;
 }
 
+.bottom-bar {
+  position: fixed;
+  bottom: 10px;
+  max-height: 50px;
+  width: 100%;
+}

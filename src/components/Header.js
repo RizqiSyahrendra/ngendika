@@ -22,19 +22,19 @@ const Header = () => {
                     <Nav className="ms-auto d-none d-md-flex d-lg-flex">
                         <LinkContainer exact to="/">
                             <Nav.Link className="px-2 d-flex flex-column align-items-center justify-content-end">
-                                <i class="far fa-comment-dots"></i>
+                                <i className="far fa-comment-dots"></i>
                                 <span>Chat</span>
                             </Nav.Link>
                         </LinkContainer>
                         <LinkContainer exact to="/community">
                             <Nav.Link className="px-2 d-flex flex-column align-items-center justify-content-end">
-                                <i class="fas fa-users"></i>
+                                <i className="fas fa-users"></i>
                                 <span>Community</span>
                             </Nav.Link>
                         </LinkContainer>
                         <LinkContainer exact to="/profile">
                             <Nav.Link className="px-2 d-flex flex-column align-items-center justify-content-end">
-                                <i class="fas fa-user"></i>
+                                <i className="fas fa-user"></i>
                                 <span>Profile</span>
                             </Nav.Link>
                         </LinkContainer>

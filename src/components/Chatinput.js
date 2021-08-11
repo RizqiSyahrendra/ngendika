@@ -50,7 +50,7 @@ const Chatinput = () => {
                         onKeyUp={onEnter}
                     />
                     <Button onClick={submitMessage} variant="primary" id="button-addon2">
-                        <i class="fas fa-paper-plane"></i>
+                        <i className="fas fa-paper-plane"></i>
                     </Button>
                 </InputGroup>
             </Col>

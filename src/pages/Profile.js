@@ -79,60 +79,58 @@ const Profile = () => {
     }
 
     return (
-        <div className="main">
-                <Container className="py-3">
-                    <Row>
-                        <Col sm={12} md={12} lg={12} className="text-center py-4">
-                            <div className="profile-img-container rounded-circle">
-                                <input ref={inputProfileImg} type="file" className="profile-img-button" onChange={handleChangeImage}></input>
-                                <Image className="img-cover" onClick={e => inputProfileImg.current.click()} src={profileImg} roundedCircle fluid />
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={12} md={6} lg={6} className="profile-box mx-auto">
-                            <Form>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter name" value={email} readOnly />
-                                </Form.Group>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Name</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter name" value={name} onChange={e => setName(e.target.value)} />
-                                </Form.Group>
-                                <div>
-                                    <Button variant="primary" onClick={onClickSaveProfile}>
-                                        Save
-                                    </Button>
-                                </div>
-                            </Form>
-                        </Col>
-                    </Row>
-                    <Row className="mt-4">
-                        <Col sm={12} md={6} lg={6} className="profile-box mx-auto">
-                            <Form>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Old Password</Form.Label>
-                                    <Form.Control type="password" value={oldPassword} placeholder="Enter old password" onChange={e => setOldPassword(e.target.value)} />
-                                </Form.Group>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>New Password</Form.Label>
-                                    <Form.Control type="password" value={password} placeholder="Enter password" onChange={e => setPassword(e.target.value)} />
-                                </Form.Group>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>New Password Confirmation</Form.Label>
-                                    <Form.Control type="password" value={confirmPassword} placeholder="Enter confirmation password" onChange={e => setConfirmPassword(e.target.value)} />
-                                </Form.Group>
-                                <div>
-                                    <Button variant="primary" onClick={onSaveProfile}>
-                                        Save
-                                    </Button>
-                                </div>
-                            </Form>
-                        </Col>
-                    </Row>
-                </Container>
-        </div>
+        <Container className="py-3">
+            <Row>
+                <Col sm={12} md={12} lg={12} className="text-center py-4">
+                    <div className="profile-img-container rounded-circle">
+                        <input ref={inputProfileImg} type="file" className="profile-img-button" onChange={handleChangeImage}></input>
+                        <Image className="img-cover" onClick={e => inputProfileImg.current.click()} src={profileImg} roundedCircle fluid />
+                    </div>
+                </Col>
+            </Row>
+            <Row>
+                <Col sm={12} md={6} lg={6} className="profile-box mx-auto">
+                    <Form>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="text" placeholder="Enter name" value={email} readOnly />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control type="text" placeholder="Enter name" value={name} onChange={e => setName(e.target.value)} />
+                        </Form.Group>
+                        <div>
+                            <Button variant="primary" onClick={onClickSaveProfile}>
+                                Save
+                            </Button>
+                        </div>
+                    </Form>
+                </Col>
+            </Row>
+            <Row className="mt-4">
+                <Col sm={12} md={6} lg={6} className="profile-box mx-auto">
+                    <Form>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Old Password</Form.Label>
+                            <Form.Control type="password" value={oldPassword} placeholder="Enter old password" onChange={e => setOldPassword(e.target.value)} />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>New Password</Form.Label>
+                            <Form.Control type="password" value={password} placeholder="Enter password" onChange={e => setPassword(e.target.value)} />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>New Password Confirmation</Form.Label>
+                            <Form.Control type="password" value={confirmPassword} placeholder="Enter confirmation password" onChange={e => setConfirmPassword(e.target.value)} />
+                        </Form.Group>
+                        <div>
+                            <Button variant="primary" onClick={onSaveProfile}>
+                                Save
+                            </Button>
+                        </div>
+                    </Form>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 

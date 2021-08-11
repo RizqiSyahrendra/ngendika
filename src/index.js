@@ -4,6 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { StoreContextProvider } from './store';
+import { initSocket } from './utils/socket';
+
+const loggedInUser = localStorage.getItem('stateUser');
+if (loggedInUser !== null) {
+  initSocket(JSON.parse(loggedInUser));
+}
 
 ReactDOM.render(
   <StoreContextProvider>

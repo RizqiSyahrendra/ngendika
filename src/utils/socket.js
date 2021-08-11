@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 
-const socket = io("ws://localhost:5000", {transports: ["websocket", "polling"], autoConnect: false});
+const socket = io("ws://localhost:5000", {transports: ["websocket", "polling"], autoConnect: false, forceNew: true});
 
 socket.on("connect_error", () => {
     console.error('failed to connect ws server');

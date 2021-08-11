@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Container, Navbar, Nav, Button, NavDropdown } from 'react-bootstrap'
+import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap';
 import { StoreContext } from '../store'
 

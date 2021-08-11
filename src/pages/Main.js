@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Col, Container, Row } from 'react-bootstrap';
 import Header from '../components/Header';
 import Chatscreen from '../components/Chatscreen';
@@ -9,18 +9,9 @@ import Chatinput from '../components/Chatinput';
 import FriendListScreen from '../components/FriendListScreen';
 import { StoreContext } from '../store';
 import WelcomeChatScreen from '../components/WelcomeChatScreen';
-import socket, { initSocket } from '../utils/socket';
 
 const Main = () => { 
-    const { stateUser, stateActiveChat, dispatchActiveChat } = useContext(StoreContext);
-
-    useEffect(() => {
-        initSocket(stateUser);
-        socket.on('private-message-incoming', ({from, message}) => {
-            dispatchActiveChat({type: 'RECEIVE_CHAT', payload: {from, message}});
-        });
-
-    }, [])
+    const { stateActiveChat } = useContext(StoreContext);
 
     return (
         <div className="main">

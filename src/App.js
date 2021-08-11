@@ -8,8 +8,19 @@ import { StoreContext } from './store'
 import 'react-toastify/dist/ReactToastify.css'
 import {ToastContainer} from 'react-toastify'
 import Community from './pages/Community'
+import socket from './utils/socket';
 
 const App = () => {
+  const { dispatchActiveChat } = useContext(StoreContext);
+
+  useEffect(() => {
+
+    socket.on('private-message-incoming', ({from, message}) => {
+        dispatchActiveChat({type: 'RECEIVE_CHAT', payload: {from, message}});
+    });
+
+}, [])
+
   
   return (
     <Router>

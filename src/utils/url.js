@@ -3,6 +3,7 @@ const host = process.env.REACT_APP_API_HOST;
 const url = {
     post_auth_login: host + '/auth/login',
     post_auth_register: host + '/auth/register',
+    put_auth_update: host + '/auth/update-user',
 
     post_friend: host + '/friend',
     post_friend_suggestion: host + '/friend/suggestion',

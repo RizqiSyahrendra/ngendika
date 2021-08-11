@@ -1,6 +1,11 @@
-import React, { useRef, useState } from 'react'
+import axios from 'axios'
+import React, { useRef, useState, useContext, useEffect } from 'react'
 import { Col, Container, Form, Image, Row, Button } from 'react-bootstrap'
+import { toast } from 'react-toastify'
 import Header from '../components/Header'
+import { StoreContext } from '../store'
+import errorMessage from '../utils/errorMessage'
+import url from '../utils/url'
 
 const Profile = () => {
     const inputProfileImg = useRef(null);
@@ -9,13 +14,29 @@ const Profile = () => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const { stateUser, dispatchUser } = useContext(StoreContext);
 
-    const onClickSaveProfile = () => {
-        
+    useEffect(() => {
+        setEmail(stateUser.email);
+        setName(stateUser.name);
+    }, [stateUser]);
+
+    const onClickSaveProfile = async () => {
+        try {
+            const { data } = await axios.put(url.put_auth_update, {
+                token: stateUser.access_token,
+                name: name
+            });
+
+            dispatchUser({type: 'CHANGE_PROFILE', payload: {name}});
+            toast.success(data.message);
+        } catch (error) {
+            toast.error(errorMessage(error));
+        }
     }
 
     const onSaveProfile = () => {
-        
+
     }
 
     return (

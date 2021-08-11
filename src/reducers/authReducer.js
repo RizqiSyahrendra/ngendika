@@ -6,8 +6,14 @@ const authInitialState = {
 
 const authReducer = (state, action) => {
     const {payload} = action;
+    const newState = {...state};
 
     switch (action.type) {
+        case 'CHANGE_PROFILE':
+            newState.name = payload.name;
+            localStorage.setItem('stateUser', JSON.stringify(newState));
+            return newState;
+
         case 'LOGIN':
             localStorage.setItem('stateUser', JSON.stringify(payload));
             return payload;

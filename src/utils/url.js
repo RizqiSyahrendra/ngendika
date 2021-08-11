@@ -4,6 +4,7 @@ const url = {
     post_auth_login: host + '/auth/login',
     post_auth_register: host + '/auth/register',
     put_auth_update: host + '/auth/update-user',
+    put_auth_update_pw: host + '/auth/update-pw',
 
     post_friend: host + '/friend',
     post_friend_suggestion: host + '/friend/suggestion',

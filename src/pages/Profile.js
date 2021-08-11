@@ -14,6 +14,7 @@ const Profile = () => {
     const [oldProfileImg, setOldProfileImg] = useState('/logo512.png');
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
+    const [oldPassword, setOldPassword] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const { stateUser, dispatchUser } = useContext(StoreContext);
@@ -56,8 +57,26 @@ const Profile = () => {
         }
     }
 
-    const onSaveProfile = () => {
+    const onSaveProfile = async () => {
+        try {
+            const { data } = await axios.put(url.put_auth_update_pw, {
+                token: stateUser.access_token, 
+                old_password: oldPassword,
+                new_password: password,
+                new_password_confirm: confirmPassword
+            });
+            
+            toast.success(data.message);
+            clearInputPassword();
+        } catch (error) {
+            toast.error(errorMessage(error));
+        }
+    }
 
+    const clearInputPassword = () => {
+        setOldPassword("");
+        setPassword("");
+        setConfirmPassword("");
     }
 
     return (
@@ -95,11 +114,15 @@ const Profile = () => {
                         <Col sm={12} md={6} lg={6} className="profile-box mx-auto">
                             <Form>
                                 <Form.Group className="mb-3">
-                                    <Form.Label>Password</Form.Label>
+                                    <Form.Label>Old Password</Form.Label>
+                                    <Form.Control type="password" placeholder="Enter old password" onChange={e => setOldPassword(e.target.value)} />
+                                </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>New Password</Form.Label>
                                     <Form.Control type="password" placeholder="Enter password" onChange={e => setPassword(e.target.value)} />
                                 </Form.Group>
                                 <Form.Group className="mb-3">
-                                    <Form.Label>Password Confirmation</Form.Label>
+                                    <Form.Label>New Password Confirmation</Form.Label>
                                     <Form.Control type="password" placeholder="Enter confirmation password" onChange={e => setConfirmPassword(e.target.value)} />
                                 </Form.Group>
                                 <div>

@@ -42,7 +42,7 @@ const Login = ({history}) => {
         <div className="main">
             <Container className="py-5">
                 <Row>
-                    <h1 className="text-center">Ngendika</h1>
+                    <h1 className="text-center login-heading-text">Ngendika</h1>
                 </Row>
                 <Row>
                     <Col className="authbox mx-auto" sm={6} md={6} lg={6}>

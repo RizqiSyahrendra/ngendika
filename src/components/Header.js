@@ -21,19 +21,19 @@ const Header = () => {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ms-auto navbar-center">
                         <LinkContainer exact to="/">
-                            <Nav.Link className="px-2 d-flex flex-column align-items-center">
+                            <Nav.Link className="px-2 d-flex flex-column align-items-center justify-content-end">
                                 <i class="far fa-comment-dots"></i>
                                 <span>Chat</span>
                             </Nav.Link>
                         </LinkContainer>
                         <LinkContainer exact to="/community">
-                            <Nav.Link className="px-2 d-flex flex-column align-items-center">
+                            <Nav.Link className="px-2 d-flex flex-column align-items-center justify-content-end">
                                 <i class="fas fa-users"></i>
                                 <span>Community</span>
                             </Nav.Link>
                         </LinkContainer>
                         <LinkContainer exact to="/profile">
-                            <Nav.Link className="px-2 d-flex flex-column align-items-center">
+                            <Nav.Link className="px-2 d-flex flex-column align-items-center justify-content-end">
                                 <i class="fas fa-user"></i>
                                 <span>Profile</span>
                             </Nav.Link>

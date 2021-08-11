@@ -7,6 +7,21 @@
   --fontsecondary: #99aab5;
 }
 
+@font-face {
+  font-family: jawadwipa;
+  src: url('./font//Jawadwipa.ttf');
+}
+
+.login-heading-text {
+  font-family: jawadwipa;
+  font-size: 50px;
+}
+
+.navbar-brand {
+  font-family: jawadwipa;
+  font-size: 32px;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 5px;

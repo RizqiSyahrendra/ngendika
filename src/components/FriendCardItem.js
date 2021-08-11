@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState, useContext } from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Image } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { confirmAlert } from '../utils/alert'
 import url from '../utils/url'
@@ -13,6 +13,8 @@ const FriendCardItem = ({data, isFriend, friendRequest, callback}) => {
     const [isBtnRemoveActive, setIsBtnRemoveActive] = useState(true)
     const [isBtnConfirmActive, setIsBtnConfirmActive] = useState(true)
     const { stateUser } = useContext(StoreContext)
+
+    const avatarPath = url.uploads + data.avatar;
 
     const handleAdd = (id) => {
         setIsBtnAddActive(false);
@@ -99,6 +101,7 @@ const FriendCardItem = ({data, isFriend, friendRequest, callback}) => {
     return (
         <div className="d-flex person-item flex-wrap">
             <span className="chat-item-pict mt-1">
+                {data.avatar ? <Image className="img-cover rounded-circle" src={avatarPath} /> : ''}
             </span>
             <div className="d-flex flex-column flex-fill px-2">
                 <span>{data.name}</span>

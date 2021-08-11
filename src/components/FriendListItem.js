@@ -1,11 +1,14 @@
 import React from 'react'
-
+import { Image } from 'react-bootstrap'
+import url from '../utils/url'
 
 const FriendListItem = ({data, isActive, onClick}) => {
+    const avatarPath = url.uploads + data.avatar;
 
     return (
         <div className={`d-flex chat-list-item ${isActive ? 'active' : ''}`} onClick={onClick}>
             <span className="chat-item-pict mt-1">
+                {data.avatar ? <Image className="img-cover rounded-circle" src={avatarPath} /> : ''}
             </span>
             <div className="d-flex flex-column flex-wrap ps-1 justify-content-center">
                 <span>{data.name}</span>

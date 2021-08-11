@@ -10,6 +10,8 @@ import url from '../utils/url'
 const Profile = () => {
     const inputProfileImg = useRef(null);
     const [profileImg, setProfileImg] = useState('/logo512.png');
+    const [profileImgObj, setProfileImgObj] = useState(null);
+    const [oldProfileImg, setOldProfileImg] = useState('/logo512.png');
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -19,16 +21,35 @@ const Profile = () => {
     useEffect(() => {
         setEmail(stateUser.email);
         setName(stateUser.name);
+
+        if (stateUser.avatar) {
+            setProfileImg(url.uploads + stateUser.avatar);
+        }
     }, [stateUser]);
+
+    useEffect(() => {
+        if (stateUser.avatar) {
+            setOldProfileImg(url.uploads + stateUser.avatar);
+        }
+    }, []);
+
+    const handleChangeImage = (e) => {
+        setProfileImg(URL.createObjectURL(e.target.files[0]));
+        setProfileImgObj(e.target.files[0]);
+    }
 
     const onClickSaveProfile = async () => {
         try {
-            const { data } = await axios.put(url.put_auth_update, {
-                token: stateUser.access_token,
-                name: name
-            });
+            const fd = new FormData();
+            fd.append('token', stateUser.access_token);
+            fd.append('name', name);
+            if (profileImg !== oldProfileImg) {
+                fd.append('avatar', profileImgObj);
+            }
 
-            dispatchUser({type: 'CHANGE_PROFILE', payload: {name}});
+            const { data } = await axios.put(url.put_auth_update, fd);
+
+            dispatchUser({type: 'CHANGE_PROFILE', payload: {...data.data}});
             toast.success(data.message);
         } catch (error) {
             toast.error(errorMessage(error));
@@ -46,7 +67,7 @@ const Profile = () => {
                     <Row>
                         <Col sm={12} md={12} lg={12} className="text-center py-4">
                             <div className="profile-img-container rounded-circle">
-                                <input ref={inputProfileImg} type="file" className="profile-img-button" onChange={e => setProfileImg(URL.createObjectURL(e.target.files[0]))}></input>
+                                <input ref={inputProfileImg} type="file" className="profile-img-button" onChange={handleChangeImage}></input>
                                 <Image className="img-cover" onClick={e => inputProfileImg.current.click()} src={profileImg} roundedCircle fluid />
                             </div>
                         </Col>

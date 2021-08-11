@@ -11,6 +11,7 @@ const authReducer = (state, action) => {
     switch (action.type) {
         case 'CHANGE_PROFILE':
             newState.name = payload.name;
+            newState.avatar = payload.avatar;
             localStorage.setItem('stateUser', JSON.stringify(newState));
             return newState;
 

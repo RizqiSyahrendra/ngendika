@@ -1,8 +1,11 @@
 import React, { useContext } from 'react'
+import { Image } from 'react-bootstrap'
 import { StoreContext } from '../store'
+import url from '../utils/url'
 
-const Chatitem = ({data}) => {
+const Chatitem = ({data, friend}) => {
     const { stateUser } = useContext(StoreContext);
+    const avatarPath = url.uploads + friend.avatar;
 
     if (data.user_email === stateUser.email) {
         return (
@@ -17,6 +20,7 @@ const Chatitem = ({data}) => {
     return (
         <div className="d-flex">
             <span className="chat-item-pict mt-1">
+                {friend.avatar ? <Image className="img-cover rounded-circle" src={avatarPath} /> : ''}
             </span>
             <div className="d-flex flex-column">
                 <span>{data.user_name}</span>

@@ -38,9 +38,9 @@ const Chatinput = () => {
     }
 
     return (
-        <Row className="my-2 px-2">
+        <Row className="px-2">
             <Col>
-                <InputGroup className="mb-3">
+                <InputGroup>
                     <FormControl
                         placeholder="Write message here"
                         aria-label="Write message here"

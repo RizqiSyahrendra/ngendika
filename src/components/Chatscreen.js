@@ -8,7 +8,7 @@ const Chatscreen = () => {
     const { user } = stateActiveChat;
 
     return (
-        <div className="py-4 chat-screen">
+        <div className="py-2 chat-screen">
         {
             stateActiveChat.chatList.map((item, idxChat) => (
                 <Row key={idxChat}>

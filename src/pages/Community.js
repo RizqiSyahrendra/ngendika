@@ -7,7 +7,7 @@ import { StoreContext } from '../store'
 import errorMessage from '../utils/errorMessage'
 
 const Community = () => {
-    const { stateUser } = useContext(StoreContext);
+    const { stateUser, dispatchActiveChat } = useContext(StoreContext);
     const [friendList, setFriendList] = useState([]);
     const [friendRequest, setFriendRequest] = useState([]);
     const [friendSuggestion, setFriendSuggestion] = useState([]);
@@ -64,6 +64,7 @@ const Community = () => {
         loadFriends();
         loadFriendSuggestion();
         loadFriendRequest();
+        dispatchActiveChat({type: 'CLEAR_ALL_CHAT'});
     }, []);
 
     return (

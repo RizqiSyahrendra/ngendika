@@ -16,7 +16,7 @@ const Profile = () => {
     const [oldPassword, setOldPassword] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const { stateUser, dispatchUser } = useContext(StoreContext);
+    const { stateUser, dispatchUser, dispatchActiveChat } = useContext(StoreContext);
 
     useEffect(() => {
         setEmail(stateUser.email);
@@ -28,6 +28,8 @@ const Profile = () => {
     }, [stateUser]);
 
     useEffect(() => {
+        dispatchActiveChat({type: 'CLEAR_ALL_CHAT'});
+        
         if (stateUser.avatar) {
             setOldProfileImg(url.uploads + stateUser.avatar);
         }

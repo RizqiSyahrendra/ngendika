@@ -10,6 +10,7 @@ import {ToastContainer} from 'react-toastify'
 import Community from './pages/Community'
 import socket from './utils/socket'
 import Header from './components/Header'
+import HeaderChatRoom from './components/HeaderChatRoom'
 import Bottombar from './components/Bottombar'
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
         <PrivateRoute>
           <div className="main">
             <Header />
+            <HeaderChatRoom />
               <Route exact path="/" component={Main} />
               <Route exact path="/community" component={Community} />
               <Route exact path="/profile" component={Profile} />

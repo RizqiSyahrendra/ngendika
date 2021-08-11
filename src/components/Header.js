@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { StoreContext } from '../store'
 
 const Header = () => {
-    const { stateUser, dispatchUser, dispatchActiveChat } = useContext(StoreContext);
+    const { stateUser, stateActiveChat, dispatchUser, dispatchActiveChat } = useContext(StoreContext);
 
     const onClickLogout = () => {
         dispatchUser({type: 'LOGOUT'});
@@ -12,7 +12,7 @@ const Header = () => {
     }
 
     return (
-        <Navbar sticky="top" bg="dark" variant="dark">
+        <Navbar sticky="top" bg="dark" variant="dark" className={stateActiveChat.user.id ? 'd-none d-md-flex d-lg-flex' : ''}>
             <Container>
                 <Navbar.Brand href="/">
                     Ngendika

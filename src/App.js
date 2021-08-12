@@ -15,14 +15,18 @@ import Bottombar from './components/Bottombar'
 import errorMessage from './utils/errorMessage'
 import axios from 'axios'
 import url from './utils/url'
+import notifSoundWav from './audio/notif.wav'
 
 const App = () => {
   const { stateUser, stateActiveChat, dispatchActiveChat, stateFriendList, dispatchFriendList } = useContext(StoreContext);
 
   useEffect(() => {
 
+    const notifSound = new Audio(notifSoundWav);
+
     socket.on('private-message-incoming', ({from, message}) => {
       dispatchActiveChat({type: 'RECEIVE_CHAT', payload: {from, message}});
+      notifSound.play();
       
       if (from.user_id !== stateActiveChat.user.id) {
           updateUnreadMessage(from);

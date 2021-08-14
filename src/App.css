@@ -188,6 +188,44 @@
   cursor: pointer;
 }
 
+.search-friend-chat {
+  background: var(--bgmain);
+  color: var(--fontmain);
+  border: none;
+  border-bottom: 1px solid var(--bgsecondary);
+  border-radius: 0px;
+}
+
+.search-friend-chat:focus {
+  background: var(--bgmain);
+  color: var(--fontmain);
+}
+
+.search-friend-chat + button, .search-friend-chat + button:hover, .search-friend-chat + button:focus {
+  background: var(--bgmain);
+  color: var(--fontmain);
+  border: none;
+}
+
+.search-community {
+  background: var(--bgmainlighter);
+  color: var(--fontmain);
+  border: none;
+  border-bottom: 1px solid var(--bgsecondary);
+  border-radius: 0px;
+}
+
+.search-community:focus {
+  background: var(--bgmainlighter);
+  color: var(--fontmain);
+}
+
+.search-community + button, .search-community + button:hover, .search-community + button:focus {
+  background: var(--bgmainlighter);
+  color: var(--fontmain);
+  border: none;
+}
+
 /* 
   ##Device = Most of the Smartphones Mobiles (Portrait)
   ##Screen = B/w 320px to 479px

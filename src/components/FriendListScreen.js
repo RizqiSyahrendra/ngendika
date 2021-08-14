@@ -1,14 +1,16 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import FriendListItem from './FriendListItem'
 import { StoreContext } from '../store'
 import axios from 'axios'
 import url from '../utils/url'
 import errorMessage from '../utils/errorMessage'
+import { Form, InputGroup, Button } from 'react-bootstrap'
 
 const FriendListScreen = () => {
     const { 
         stateUser, stateActiveChat, 
         dispatchActiveChat, stateFriendList, dispatchFriendList } = useContext(StoreContext);
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
         loadFriends();
@@ -54,10 +56,28 @@ const FriendListScreen = () => {
         } catch (error) {
           console.error(errorMessage(error));
         }
-      }
+    }
+
+    const onSearch = () => {
+        if (search) {
+            
+        }
+    }
+
+    const handleEnterSearch = (e) => {
+        if (e.key === 'Enter') {
+            onSearch();
+        }
+    }
 
     return (
         <div>
+            <InputGroup>   
+                <Form.Control onKeyUp={handleEnterSearch} className="search-friend-chat" type="text" placeholder="search here" />
+                <Button onClick={onSearch}>
+                    <i className="fas fa-search"></i>
+                </Button> 
+            </InputGroup>
             {
                 stateFriendList.map((friend, idxFriend) => (
                     <FriendListItem 

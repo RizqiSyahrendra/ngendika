@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Row, InputGroup, Form, Button } from 'react-bootstrap'
 import FriendCardItem from '../components/FriendCardItem'
 import url from '../utils/url'
 import { StoreContext } from '../store'
@@ -67,6 +67,16 @@ const Community = () => {
         dispatchActiveChat({type: 'CLEAR_ALL_CHAT'});
     }, []);
 
+    const onSearch = () => {
+        
+    }
+
+    const handleEnterSearch = (e) => {
+        if (e.key === 'Enter') {
+            onSearch();
+        }
+    }
+
     return (
         <Container>
             <Row>
@@ -88,6 +98,18 @@ const Community = () => {
                     <Row className="my-4 community-box">
                         <Col sm={12} md={12} lg={12} className="text-center">
                             <h5>My Friends</h5>
+                            <InputGroup className="d-none d-md-flex d-lg-flex w-25 ms-auto">   
+                                <Form.Control onKeyUp={handleEnterSearch} className="search-community" type="text" placeholder="search here" />
+                                <Button onClick={onSearch}>
+                                    <i className="fas fa-search"></i>
+                                </Button> 
+                            </InputGroup>
+                            <InputGroup className="d-flex d-md-none d-lg-none">   
+                                <Form.Control onKeyUp={handleEnterSearch} className="search-community" type="text" placeholder="search here" />
+                                <Button onClick={onSearch}>
+                                    <i className="fas fa-search"></i>
+                                </Button> 
+                            </InputGroup>
                         </Col>
                         <Col className="py-2">
                             <Row>
@@ -104,6 +126,18 @@ const Community = () => {
                     <Row className="my-4 community-box">
                         <Col sm={12} md={12} lg={12} className="text-center">
                             <h5>Find Friends</h5>
+                            <InputGroup className="d-none d-md-flex d-lg-flex w-25 ms-auto">   
+                                <Form.Control onKeyUp={handleEnterSearch} className="search-community" type="text" placeholder="search here" />
+                                <Button onClick={onSearch}>
+                                    <i className="fas fa-search"></i>
+                                </Button> 
+                            </InputGroup>
+                            <InputGroup className="d-flex d-md-none d-lg-none">   
+                                <Form.Control onKeyUp={handleEnterSearch} className="search-community" type="text" placeholder="search here" />
+                                <Button onClick={onSearch}>
+                                    <i className="fas fa-search"></i>
+                                </Button> 
+                            </InputGroup>
                         </Col>
                         <Col className="py-2">
                             <Row>

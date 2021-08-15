@@ -11,10 +11,17 @@ const Community = () => {
     const [friendList, setFriendList] = useState([]);
     const [friendRequest, setFriendRequest] = useState([]);
     const [friendSuggestion, setFriendSuggestion] = useState([]);
+    const [sFriend, setSFriend] = useState('');
+    const [sFriendSug, setSFriendSug] = useState('');
 
     const loadFriends = async () => {
         try {
-            const {data} = await axios.post(url.post_friend, {token: stateUser.access_token});
+            const {data} = await axios.post(url.post_friend, {
+                token: stateUser.access_token,
+                s: sFriend,
+                from: 0,
+                size: parseInt(process.env.REACT_APP_FRIEND_LIMIT)
+            });
             setFriendList([...data.data]);
         } catch (error) {
             console.error(errorMessage(error));
@@ -23,7 +30,12 @@ const Community = () => {
 
     const loadFriendSuggestion = async () => {
         try {
-            const {data} = await axios.post(url.post_friend_suggestion, {token: stateUser.access_token});
+            const {data} = await axios.post(url.post_friend_suggestion, {
+                token: stateUser.access_token,
+                s: sFriendSug,
+                from: 0,
+                size: parseInt(process.env.REACT_APP_FRIEND_LIMIT)
+            });
             setFriendSuggestion([...data.data]);
         } catch (error) {
             console.error(errorMessage(error));
@@ -68,12 +80,22 @@ const Community = () => {
     }, []);
 
     const onSearch = () => {
-        
+        loadFriends();
     }
 
     const handleEnterSearch = (e) => {
         if (e.key === 'Enter') {
             onSearch();
+        }
+    }
+
+    const onSearchFriends = () => {
+        loadFriendSuggestion();
+    }
+
+    const handleEnterSearchFriends = (e) => {
+        if (e.key === 'Enter') {
+            onSearchFriends();
         }
     }
 
@@ -99,13 +121,13 @@ const Community = () => {
                         <Col sm={12} md={12} lg={12} className="text-center">
                             <h5>My Friends</h5>
                             <InputGroup className="d-none d-md-flex d-lg-flex w-25 ms-auto">   
-                                <Form.Control onKeyUp={handleEnterSearch} className="search-community" type="text" placeholder="search here" />
+                                <Form.Control onChange={e => setSFriend(e.target.value)} onKeyUp={handleEnterSearch} className="search-community" type="text" placeholder="search here" />
                                 <Button onClick={onSearch}>
                                     <i className="fas fa-search"></i>
                                 </Button> 
                             </InputGroup>
                             <InputGroup className="d-flex d-md-none d-lg-none">   
-                                <Form.Control onKeyUp={handleEnterSearch} className="search-community" type="text" placeholder="search here" />
+                                <Form.Control onChange={e => setSFriend(e.target.value)} onKeyUp={handleEnterSearch} className="search-community" type="text" placeholder="search here" />
                                 <Button onClick={onSearch}>
                                     <i className="fas fa-search"></i>
                                 </Button> 
@@ -127,14 +149,14 @@ const Community = () => {
                         <Col sm={12} md={12} lg={12} className="text-center">
                             <h5>Find Friends</h5>
                             <InputGroup className="d-none d-md-flex d-lg-flex w-25 ms-auto">   
-                                <Form.Control onKeyUp={handleEnterSearch} className="search-community" type="text" placeholder="search here" />
-                                <Button onClick={onSearch}>
+                                <Form.Control onChange={e => setSFriendSug(e.target.value)} onKeyUp={handleEnterSearchFriends} className="search-community" type="text" placeholder="search here" />
+                                <Button onClick={onSearchFriends}>
                                     <i className="fas fa-search"></i>
                                 </Button> 
                             </InputGroup>
                             <InputGroup className="d-flex d-md-none d-lg-none">   
-                                <Form.Control onKeyUp={handleEnterSearch} className="search-community" type="text" placeholder="search here" />
-                                <Button onClick={onSearch}>
+                                <Form.Control onChange={e => setSFriendSug(e.target.value)} onKeyUp={handleEnterSearchFriends} className="search-community" type="text" placeholder="search here" />
+                                <Button onClick={onSearchFriends}>
                                     <i className="fas fa-search"></i>
                                 </Button> 
                             </InputGroup>

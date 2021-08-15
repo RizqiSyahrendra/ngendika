@@ -18,7 +18,12 @@ const FriendListScreen = () => {
 
     const loadFriends = async () => {
         try {
-            const {data} = await axios.post(url.post_friend, {token: stateUser.access_token});
+            const {data} = await axios.post(url.post_friend, {
+                token: stateUser.access_token,
+                s: search,
+                from: 0,
+                size: parseInt(process.env.REACT_APP_FRIEND_LIMIT)
+            });
             dispatchFriendList({type: 'UPDATE', payload: [...data.data]});
         } catch (error) {
             console.error(errorMessage(error));
@@ -59,9 +64,7 @@ const FriendListScreen = () => {
     }
 
     const onSearch = () => {
-        if (search) {
-            
-        }
+       loadFriends();   
     }
 
     const handleEnterSearch = (e) => {
@@ -73,7 +76,7 @@ const FriendListScreen = () => {
     return (
         <div>
             <InputGroup>   
-                <Form.Control onKeyUp={handleEnterSearch} className="search-friend-chat" type="text" placeholder="search here" />
+                <Form.Control onChange={e => setSearch(e.target.value)} onKeyUp={handleEnterSearch} className="search-friend-chat" type="text" placeholder="search here" />
                 <Button onClick={onSearch}>
                     <i className="fas fa-search"></i>
                 </Button> 

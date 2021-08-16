@@ -18,7 +18,3 @@ Ngendika is simple realtime chat application on web platform. Built using React 
    ```sh
    npm start
    ```
-   or :
-   ```sh
-   node index.js
-   ```

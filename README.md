@@ -10,7 +10,7 @@ Rest API is available here : https://github.com/RizqiSyahrendra/ngendika-api
 5. Community (Add/Remove Friend)
 
 ### Installation
-1. Create .env file from .env.example, API Endpoint address, and change everything you need.
+1. Create .env file from .env.example, change Rest API address, and change everything you need.
 3. Install NPM packages
    ```sh
    npm install

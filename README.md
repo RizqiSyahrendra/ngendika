@@ -1,5 +1,6 @@
 # ngendika
-Ngendika is simple realtime chat application on web platform. Built using React JS
+Ngendika is simple realtime chat application on web platform. Built using React JS. <br>
+Rest API is available here : https://github.com/RizqiSyahrendra/ngendika-api
 
 ### Features
 1. Register

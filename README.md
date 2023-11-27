@@ -1,15 +1,18 @@
 # ngendika
 Ngendika is simple realtime chat application on web platform. Built using React JS. <br>
-Rest API is available here : https://github.com/RizqiSyahrendra/ngendika-api
+Rest API is available here : https://github.com/RizqiSyahrendra/ngendika-api  
 
-### Features
+## Screenshot
+<img src="screenshot/login.png" width="400">
+
+## Features
 1. Register
 2. Login
 3. Email verification (make sure mail config has been set in .env)
 4. Chat person to person
 5. Community (Add/Remove Friend)
 
-### Installation
+## Installation
 1. Create .env file from .env.example, change Rest API address, and change everything you need.
 3. Install NPM packages
    ```sh
